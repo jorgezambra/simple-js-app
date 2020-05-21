@@ -15,3 +15,9 @@ var pokemonList = [
   types: ['fire', 'flying'],
 }
 ]
+for ( var i = 0; i < pokemonList.length; i++) {
+  document.write('<br>' + pokemonList[i].name + ' (Height ' + pokemonList[i].height+')')
+if ( pokemonList[i].height >= 1.1) {
+  document.write(' (WOW! That\'s Big!)')
+  }
+}
