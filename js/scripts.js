@@ -1,4 +1,5 @@
-var pokemonList = [
+var pokemonRepository = (function () {
+  var pokemonList = [
 {
   name: 'Bulbasaur',
   height: 0.7,
@@ -16,7 +17,27 @@ var pokemonList = [
 }
 ];
 
+function add(pokemon) {
+    pokemonList.push(pokemon);
+  }
+
+  function getAll() {
+    return pokemonList;
+  }
+
+  return {
+    add: add,
+    getAll: getAll
+  };
+})();
+
+pokemonRepository.add({
+  name : 'Wartortle',
+  height : 3.03,
+  types: ['Water'],
+});
+
 function pokemonDetails(pokemon) {
   document.write('Name' + ': ' + pokemon.name + '<br>' + 'Height' + ': ' + pokemon.height + '<br>' + 'Types' + ': ' +pokemon.types + '<br>' + '<br>');
 }
-pokemonList.forEach(pokemonDetails);
+pokemonRepository.getAll().forEach(pokemonDetails);
