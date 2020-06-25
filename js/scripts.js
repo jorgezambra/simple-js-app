@@ -21,13 +21,30 @@ function add(pokemon) {
     pokemonList.push(pokemon);
   }
 
-  function getAll() {
+function getAll() {
     return pokemonList;
   }
 
-  return {
+function addListItem(pokemon) {
+  var pokemonList = document.querySelector('ul');
+  var listItem = document.createElement('li');
+  var button = document.createElement('button');
+  button.innerText = pokemon.name;
+  button.classList.add('pokemon-name');
+  listItem.appendChild(button);
+  pokemonList.appendChild(listItem);
+  button.addEventListener('click', function (event) {showDetails(pokemon.name)
+  });
+}
+
+function showDetails(pokemon) {
+  console.log(pokemon)
+}
+
+return {
     add: add,
-    getAll: getAll
+    getAll: getAll,
+    addListItem : addListItem
   };
 })();
 
@@ -37,7 +54,6 @@ pokemonRepository.add({
   types: ['Water'],
 });
 
-function pokemonDetails(pokemon) {
-  document.write('Name' + ': ' + pokemon.name + '<br>' + 'Height' + ': ' + pokemon.height + '<br>' + 'Types' + ': ' +pokemon.types + '<br>' + '<br>');
-}
-pokemonRepository.getAll().forEach(pokemonDetails);
+pokemonRepository.getAll().forEach(function (pokemon){
+    pokemonRepository.addListItem(pokemon);
+  })
