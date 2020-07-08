@@ -52,9 +52,47 @@ var pokemonRepository = (function () {
 
     function showDetails(item) {
     pokemonRepository.loadDetails(item).then(function () {
-      console.log(item);
+      showModal(item);
     });
-  }
+    }
+
+    function showModal(item) {
+        var $modalContainer = document.querySelector('#modal-container');
+
+        $modalContainer.innerHTML = '';
+
+        var modal = document.createElement('div');
+        modal.classList.add('modal');
+
+        var closeButtonElement = document.createElement('button');
+        closeButtonElement.classList.add('modal-close');
+        closeButtonElement.innerText = 'Close';
+        closeButtonElement.addEventListener('click', hideModal);
+
+        var nameElement = document.createElement('h1');
+        nameElement.innerText = item.name;
+
+        var imageElement = document.createElement('img');
+        imageElement.classList.add('modal-img');
+        imageElement.setAttribute('src', item.imageUrl);
+
+        var heightElement = document.createElement('p');
+        heightElement.innerText = 'height : ' + item.height + 'm';
+
+        modal.appendChild(closeButtonElement);
+        modal.appendChild(nameElement);
+        modal.appendChild(imageElement);
+        modal.appendChild(heightElement);
+
+        $modalContainer.appendChild(modal);
+        $modalContainer.classList.add('is-visible');
+    }
+
+    function hideModal() {
+        var $modalContainer = document.querySelector('#modal-container');
+        $modalContainer.classList.remove('is-visible');
+    }
+
 return {
     add: add,
     getAll: getAll,
